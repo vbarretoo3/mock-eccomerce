@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+
+* {
+  --priamry: rgb(173, 215, 246);
+  --secondary: rgb(34, 72, 112);
+  --secondary_transparent: rgba(34, 72, 112, 0.7);
+  --complement: rgb(18, 44, 52);
+  --offwhite: hsl(210, 33%, 92%);
+  --defaultfont: 'Josefin Sans'
+}
+
+body {
+  background: var(--offwhite);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Josefin Sans', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--defaultfont) ;
+}
+
+h2 {margin: 0;}
+h1 {margin: 0;}
+a {
+  text-decoration: none;
+  color: var(--offwhite);
+  text-align: left;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/*Header and Navbar style below*/
+.show-menu {
+  position: absolute;
+  right: 0;
+  width: 30vh;
+  display: grid;
+  background: var(--secondary_transparent);
+  color: var(--offwhite);
+  margin: 0;
+  padding: 2vh;
+}
+
+.show-menu:focus-visible {
+}
+
+.hide-menu {
+  display: none;
+}
+
+.header-container {
+  background: var(--complement);
+  color: var(--priamry);
+  min-height: 8vh;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2vh;
+}
+
+.menu-icon {
+  height: 25px;
+  width: 25px;
+}
+
+.navbar-list {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: left;
+  width: 100%;
+}
+
+.navbar {
+  display: grid;
+}
+
+.navbar-title {
+  margin: 0;
+  padding: 2vh;
+  font-size: 1.5em;
+}
+/*Home style below*/
+.container {
+  color: var(--complement);
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.hero{
+  background-image: url(https://img.guess.com/image/upload/f_auto,q_auto/v1/NA/Asset/North%20America/E-Commerce/Guess/Bug%20Number/7627/G_Site_Global_Dropdown_ColorStory_7627);
+  background-size: cover;
+  background-position: bottom;
+  width: 100vw;
+  display: grid;
+  text-align: center;
+  justify-content: center;
+}
+
+.hero-title {
+  color: var(--offwhite);
+  text-shadow: 0px 0px 5px rgb(0, 0, 0);
+  font-size: 5em;
+  padding-top: 10%;
+}
+
+.discount {
+  background-color: linear-gradient(90deg, #e3eaf1, #da0101, #e3eaf1);
+  background-color: -webkit-linear-gradient(90deg, rgb(227, 234, 241), rgb(218, 1, 1), rgb(228, 235, 241));
+  min-height: 50px;
+  width: 70%;
+  display: grid;
+  align-self: center;
+  align-items: center;
+}
+
+.divider {
+  border-top: 1px dashed rgba(0, 0, 0, .5);
+}
