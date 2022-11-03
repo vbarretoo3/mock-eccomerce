@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdMenu, MdClose } from 'react-icons/md';
+import { MdMenu, MdClose, MdOutlineShoppingCart } from 'react-icons/md';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +23,10 @@ function Header() {
     <>
       <div className='header-container'>
         <img src="/" alt='LOGO' className='logo' onClick={() => handleClick()}/>
-        {isOpen === true ? <MdClose className='menu-icon' onClick={handleMenu}/> : <MdMenu className='menu-icon' onClick={handleMenu}/>}
+        <div className='icons'>
+          <MdOutlineShoppingCart className='shop-cart' onClick={() => {history('/cart')}}/>
+          {isOpen === true ? <MdClose className='menu-icon' onClick={handleMenu}/> : <MdMenu className='menu-icon' onClick={handleMenu}/>}
+        </div>
       </div>
       <div className={isOpen === true ? 'show-menu': 'hide-menu'}>
         <Navbar />
