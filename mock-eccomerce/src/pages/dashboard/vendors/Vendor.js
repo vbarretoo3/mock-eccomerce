@@ -9,23 +9,23 @@ function Vendor({item, id}) {
   }
 
   return (
-    <div onClick={handleClick}  className='customer-container'>
+    <div onClick={handleClick}  className='table-headers vendor-headers inventory-items'>
       <div>
         <p>
           {item.name}
         </p>
       </div>
-      <div className='fields'>
+      <div className='sizes'>
         <p>
           {item.contact.email}
         </p>
       </div>
-      <div className='fields'>
+      <div className='sizes'>
         <p>
           {item.contact.phone}
         </p>
       </div>
-      <div className='fields'>
+      <div className='sizes'>
         <a href={item.contact.website} target='_blank' rel='noopener' className='table-links'>
           {item.contact.website}
         </a>

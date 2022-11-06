@@ -10,7 +10,7 @@ export default function Cust() {
   const docRef = doc(db, 'customers', `${id.id}`)
 
   const docSnap = async() => {
-    await getDoc(docRef).then((doc) => setCustomer(doc.data()))
+    await getDoc(docRef).then((doc) => setCustomer({id: doc.id, data: doc.data()}))
   }
 
   useEffect(() => {
@@ -20,54 +20,51 @@ export default function Cust() {
   if (customer == null) return null
 
   return (
-    <div className='customer-detail-container'>
-      <div className='fields'>
-        <h3>
-          Name:
-        </h3>
-        <p>{customer.name}</p>
-      </div>
-      <div className='customer-subdetails'>
-        <div className="fields">
+    <div className='dash'>
+      <div className='customer-detail-container'>
+        <div className='fields'>
           <h3>
-            Address: 
+            Name:
           </h3>
-          <p>{customer.address.address}</p>
-          <br/>
-          <br/>
-          <h3>
-            City:
-          </h3><p>{customer.address.city}</p>
-          <br/>
-          <br/>
-          <h3>
-            Province:
-          </h3>
-          <p>{customer.address.province}</p>
-          <br/>
-          <br/>
-          <h3>
-            Postal Code:
-          </h3>
-          <p>{customer.address.postal}</p>
+          <p>{customer.data.name}</p>
+        </div>
+        <div className='customer-subdetails'>
+          <div className="fields">
+            <h3>
+              Address: 
+            </h3>
+            <p>{customer.data.address.address}</p>
+            <br/>
+            <h3>
+              City:
+            </h3><p>{customer.data.address.city}</p>
+            <br/>
+            <h3>
+              Province:
+            </h3>
+            <p>{customer.data.address.province}</p>
+            <br/>
+            <h3>
+              Postal Code:
+            </h3>
+            <p>{customer.data.address.postal}</p>
+          </div>
+          <div className="fields">
+            <h3>
+              Email:
+            </h3>
+            <p>{customer.data.contact.email}</p>
+            <br/>
+            <h3>
+              Phone:
+            </h3>
+            <p>{customer.data.contact.phone}</p>
+            <br/>
+          </div>
         </div>
         <div className="fields">
-          <h3>
-            Email:
-          </h3>
-          <p>{customer.contact.email}</p>
-          <br/>
-          <br/>
-          <h3>
-            Phone:
-          </h3>
-          <p>{customer.contact.phone}</p>
-          <br/>
-          <br/>
+          <CustOrders customer={customer}/>
         </div>
-      </div>
-      <div className="fields">
-        <CustOrders customer={customer}/>
       </div>
     </div>
   )

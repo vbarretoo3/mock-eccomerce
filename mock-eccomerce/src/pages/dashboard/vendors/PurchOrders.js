@@ -7,7 +7,7 @@ function PurchOrders({vendor}) {
     const [orders, setOrders] = useState(null)
     const orderSnap = async() => {
         const ordersArr = []
-        const orderQuery = query(collection(db, 'po'), where('vendor.name', '==', vendor.name))
+        const orderQuery = query(collection(db, 'po'), where('vendor.vendorRef', '==', vendor.id))
         const querysnapshot = await getDocs(orderQuery)
         querysnapshot.forEach((doc) => {ordersArr.push({id: doc.id, data: doc.data()})})
         setOrders(ordersArr)
@@ -35,7 +35,7 @@ function PurchOrders({vendor}) {
             </div>
             {orders.map((order) =>
             <a key={order.id} href={'/dashboard/po/' + orders[0].id} className='orders-links' >
-                <div className='table-headers order-headers inventory-items rounded-border'> 
+                <div className='table-headers order-headers details-border rounded-border'> 
                     <p>
                         {order.data.id}
                     </p>

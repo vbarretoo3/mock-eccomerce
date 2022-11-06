@@ -7,7 +7,7 @@ function Navbar() {
         <nav className='navbar'>
             <ul className='navbar-list'>
                 <li>
-                    <a className='navbar-item' href='/dashboard'>Dashboard</a>
+                    <a className='navbar-item' href='/dashboard/customers'>Dashboard</a>
                 </li>
                 <li>
                     <a className='navbar-item' href='/login'>Log in</a>

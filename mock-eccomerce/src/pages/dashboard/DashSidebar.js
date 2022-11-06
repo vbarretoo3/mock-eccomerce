@@ -19,7 +19,7 @@ function DashSidebar() {
                     <NavLink className='sidebar' to='/dashboard/po'>Purchase Orders</NavLink>
                 </li>
                 <li className='sidebar-item'>
-                    <NavLink className='sidebar' to='/dashboard/inventory'>Inventory</NavLink>
+                    <NavLink className='sidebar last-child' to='/dashboard/inventory'>Inventory</NavLink>
                 </li>
             </ul>
         </nav>

@@ -9,7 +9,7 @@ function OrderItem({item, size, quantity}) {
   }
 
   return (
-    <div onClick={handleClick} className='table-headers order-items inventory-items'>
+    <div onClick={handleClick} className='table-headers order-items details-border'>
         <p>
             {item.name}
         </p>

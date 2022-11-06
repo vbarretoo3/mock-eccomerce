@@ -1,25 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import { collection, where, getDocs,query } from 'firebase/firestore';
 import {db} from '../../../context/Firebase';
-import { useNavigate } from 'react-router-dom';
 
 
 function CustOrders({customer}) {
     const [orders, setOrders] = useState(null)
-    const history = useNavigate()
     const orderSnap = async() => {
         const ordersArr = []
-        const orderQuery = query(collection(db, 'orders'), where('customer.name', '==', customer.name))
+        const orderQuery = query(collection(db, 'orders'), where('customer.customerRef', '==', customer.id))
         const querysnapshot = await getDocs(orderQuery)
         querysnapshot.forEach((doc) => {ordersArr.push({id: doc.id, data: doc.data()})})
         setOrders(ordersArr)
     }
-
+    
     useEffect(() => {
         orderSnap()
     }, [])
 
     if (orders === null) return null
+    
     return (
         <div className={orders.length === 0? 'hide-orders': 'show-orders'}>
             <h3>
@@ -37,7 +36,7 @@ function CustOrders({customer}) {
             </div>
             {orders.map((order) =>
             <a key={order.id} href={'/dashboard/orders/' + orders[0].id} className='orders-links' >
-                <div className='table-headers order-headers inventory-items rounded-border'> 
+                <div className='table-headers order-headers details-border rounded-border'> 
                     <p>
                         {order.data.id}
                     </p>
