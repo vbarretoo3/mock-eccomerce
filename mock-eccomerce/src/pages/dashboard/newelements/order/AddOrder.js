@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 export default function AddOrder() {
   const customerRef = useRef()
   const orderRef = useRef()
-  const [size, setSize] = useState('')
   const statusRef = useRef()
   const [orders, setOrders] = useState(null)
   const ordersLoc = collection(db, 'orders')
@@ -16,12 +15,20 @@ export default function AddOrder() {
   const [customerInfo, setCustomerInfo] = useState(null)
   const itemsLoc = collection(db, 'inventory')
   const [items, setItems] = useState(null)
-  const [selectedItems, setSelectedItems] = useState([])
-  const [index, setIndex] = useState(1)
+  const [count, setCount] = useState(0)
+  const [selectedItems, setSelectedItems] = useState(null)
+  const item = {
+    category: '',
+    itemRef: '',
+    name: '',
+    price: 0,
+    quantity: ''
+  }
   const [subtotal, setSubtotal] = useState(0)
   const [tax, setTax] = useState(0)
   const [total, setTotal] = useState(0)
   const history = useNavigate()
+  const [update, setUpdate] = useState(0)
 
   const docSnap = async() => {
     const custArr = []
@@ -46,10 +53,6 @@ export default function AddOrder() {
       }
     }
   }
-
-  useEffect(() => {
-    console.log(selectedItems)
-  }, [selectedItems])
 
   const CustomerDetails = useCallback(() => {
     return(
@@ -88,7 +91,27 @@ export default function AddOrder() {
   
   useEffect(() => {
     docSnap()
+    setSelectedItems([item])
   }, [])
+
+  function addLine() {
+    selectedItems.push(item)
+    setUpdate((currState) => currState + 1)
+  }
+
+  function removeLine(index, setInfo) {
+    selectedItems.splice(index, 1)
+    console.log(selectedItems)
+    if (selectedItems.length === 0) {
+        setSelectedItems([item])
+        setInfo(null)
+    }
+    setUpdate((currState) => currState - 1)
+  }
+
+  function updateinfo(items, loc) {
+    selectedItems[loc] = items
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -99,7 +122,7 @@ export default function AddOrder() {
         contact: customerInfo.data.contact,
         address: customerInfo.data.address
       },
-      item: [selectedItems],
+      item: selectedItems,
       id: Number(orderRef.current.innerText),
       status: statusRef.current.value,
       subtotal: subtotal,
@@ -114,14 +137,39 @@ export default function AddOrder() {
     var subtotals = 0
     var taxs = 0
     var totals = 0
-    if (selectedItems.length !== 0) { 
-      var subtotals = (selectedItems.price * selectedItems.quantity[size]).toFixed(2)
-      var taxs = (subtotals*.13).toFixed(2)
-      var totals = (Number(subtotals)+Number(taxs))
-      setTotal(Number(totals))
-      setSubtotal(Number(subtotals))
-      setTax(Number(taxs))
+    if (selectedItems[0].name !== '') {
+      for (let i in selectedItems) {
+        if ((selectedItems[i].quantity === undefined && selectedItems[i].price === undefined) || selectedItems[i].name === 0) {
+          for (let c in items) {
+            if (items[c].data.name === selectedItems[i].name){
+              subtotals = subtotals + items[c].data.price
+              taxs = (subtotals*.13)
+              totals = (subtotals*1.13)
+            }
+          }
+        } else if (selectedItems[i].quantity === undefined) {
+          subtotals = 2
+          taxs = (subtotals*.13)
+          totals = (subtotals*1.13)
+        } else if (selectedItems[i].price === undefined) {
+          subtotals = 3
+          taxs = (subtotals*.13)
+          totals = (subtotals*1.13)
+        } else if (selectedItems[i].name === undefined || selectedItems[i].quantity === '') {
+          subtotals = subtotals + 0
+          taxs = (subtotals*.13)
+          totals = (subtotals*1.13)
+        } else {
+          var key = Object.keys(selectedItems[i].quantity)
+          subtotals = (subtotals + (selectedItems[i].price * selectedItems[i].quantity[key[0]]))
+          taxs = (subtotals*.13)
+          totals = (subtotals*1.13)
+        }
+      }
     }
+    setSubtotal(subtotals)
+    setTax(taxs)
+    setTotal(totals)
 
     return(
         <>
@@ -130,7 +178,7 @@ export default function AddOrder() {
               Subtotal:
             </h3>
             <div>
-                ${subtotals}
+                ${subtotals.toFixed(2)}
             </div>
           </div>
           <div className='order-total-details'>
@@ -138,7 +186,7 @@ export default function AddOrder() {
               Tax:
             </h3>
             <div>
-                ${taxs}
+                ${taxs.toFixed(2)}
             </div>
           </div>
           <div className='order-total-details'>
@@ -146,12 +194,12 @@ export default function AddOrder() {
               Total:
             </h2>
             <div>
-                ${totals}
+                ${totals.toFixed(2)}
             </div>
           </div>
         </>
     )
-  }, [selectedItems])
+  }, [selectedItems, count, update])
 
   if (customers === null) return null
   if (orders === null) return null
@@ -224,8 +272,13 @@ export default function AddOrder() {
                   total:
                 </h3>
               </div>
-              <div className='table-headers order-items'>
-              <LineItem currentSize={setSize} selectedItems={setSelectedItems} setIndex={setIndex} index={index} items={items} />
+              <div>
+                {selectedItems.map((item, index) =>
+                  <div key={index} className='table-headers order-items'>
+                    <LineItem remove={removeLine} changes={setCount} currentItem={item} index={index} updateInfo={updateinfo} items={items} />
+                  </div>
+                )}
+                <button type='button' onClick={addLine}>Add Line</button>
               </div>
             </div>
             <br/>

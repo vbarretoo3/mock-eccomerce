@@ -52,6 +52,7 @@ ul {
 .show-menu {
   position: absolute;
   right: 0;
+  top: 85px;
   min-width: 250px;
   display: grid;
   background: var(--secondary_transparent);
@@ -66,6 +67,7 @@ ul {
 }
 
 .header-container {
+  z-index: +1;
   background: var(--complement);
   color: var(--priamry);
   min-height: 50px;
@@ -548,4 +550,9 @@ input {
 
 .quantity-input {
   width: 50px;
+}
+
+.test {
+  display: grid;
+  grid-auto-flow: row;
 }
