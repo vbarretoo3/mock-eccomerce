@@ -1,0 +1,72 @@
+[debug] [2022-11-13T22:59:33.929Z] ----------------------------------------------------------------------
+[debug] [2022-11-13T22:59:33.934Z] Command:       /usr/local/bin/firebase /Users/victordeoliveira/.cache/firebase/tools/lib/node_modules/firebase-tools/lib/bin/firebase functions:shell
+[debug] [2022-11-13T22:59:33.934Z] CLI Version:   11.16.0
+[debug] [2022-11-13T22:59:33.934Z] Platform:      darwin
+[debug] [2022-11-13T22:59:33.935Z] Node Version:  v16.16.0
+[debug] [2022-11-13T22:59:33.942Z] Time:          Sun Nov 13 2022 17:59:33 GMT-0500 (Eastern Standard Time)
+[debug] [2022-11-13T22:59:33.944Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-13T22:59:34.220Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-13T22:59:34.221Z] > authorizing via signed-in user (vbarreto03@gmail.com)
+[debug] [2022-11-13T22:59:34.223Z] [iam] checking project mock-eccomerce for permissions ["firebase.projects.get"]
+[debug] [2022-11-13T22:59:34.230Z] > refreshing access token with scopes: []
+[debug] [2022-11-13T22:59:34.233Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-13T22:59:34.235Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-13T22:59:35.119Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-11-13T22:59:35.125Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-13T22:59:35.152Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-eccomerce:testIamPermissions [none]
+[debug] [2022-11-13T22:59:35.156Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-eccomerce:testIamPermissions x-goog-quota-user=projects/mock-eccomerce
+[debug] [2022-11-13T22:59:35.159Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-eccomerce:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-11-13T22:59:36.632Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-eccomerce:testIamPermissions 200
+[debug] [2022-11-13T22:59:36.635Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/mock-eccomerce:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2022-11-13T22:59:36.939Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2022-11-13T22:59:36.975Z] [functions] Using node@16 from host.
+[debug] [2022-11-13T22:59:36.978Z] defaultcredentials: writing to file /Users/victordeoliveira/.config/firebase/vbarreto03_gmail_com_application_default_credentials.json
+[debug] [2022-11-13T22:59:36.995Z] DEBUG: Setting GAC to /Users/victordeoliveira/.config/firebase/vbarreto03_gmail_com_application_default_credentials.json
+[debug] [2022-11-13T22:59:36.998Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mock-eccomerce/adminSdkConfig [none]
+[debug] [2022-11-13T22:59:38.006Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/mock-eccomerce/adminSdkConfig 200
+[debug] [2022-11-13T22:59:38.009Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/mock-eccomerce/adminSdkConfig {"projectId":"mock-eccomerce","databaseURL":"https://mock-eccomerce-default-rtdb.firebaseio.com","storageBucket":"mock-eccomerce.appspot.com","locationId":"us-central"}
+[debug] [2022-11-13T22:59:38.033Z] [functions] Watching "/Users/victordeoliveira/Documents/GitHub/mock-eccomerce/mock-eccomerce/functions" for Cloud Functions...
+[debug] [2022-11-13T22:59:38.045Z] Validating nodejs source
+[debug] [2022-11-13T22:59:44.922Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint src --ext ts; exit 0",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-11-13T22:59:44.924Z] Building nodejs source
+[debug] [2022-11-13T22:59:44.925Z] Analyzing nodejs backend spec
+[debug] [2022-11-13T22:59:44.936Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-11-13T22:59:46.133Z] Serving at port 9005
+
+[debug] [2022-11-13T22:59:46.558Z] Got response from /__/functions.yaml {"endpoints":{"userAdd":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/firebase.auth/eventTypes/user.create","eventFilters":{"resource":"projects/mock-eccomerce"},"retry":false},"labels":{},"entryPoint":"userAdd"},"updateUser":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.update","eventFilters":{"resource":"projects/mock-eccomerce/databases/(default)/documents/customers/{userID}"},"retry":false},"labels":{},"entryPoint":"updateUser"},"updateVendor":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.update","eventFilters":{"resource":"projects/mock-eccomerce/databases/(default)/documents/vendors/{vendorID}"},"retry":false},"labels":{},"entryPoint":"updateVendor"},"updateItem":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"eventTrigger":{"eventType":"providers/cloud.firestore/eventTypes/document.update","eventFilters":{"resource":"projects/mock-eccomerce/databases/(default)/documents/inventory/{itemID}"},"retry":false},"labels":{},"entryPoint":"updateItem"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2022-11-13T22:59:46.590Z] shutdown requested via /__/quitquitquit
+
+[debug] [2022-11-13T22:59:46.629Z] [functions] Loaded functions definitions from source: userAdd, updateUser, updateVendor, updateItem.
+[debug] [2022-11-13T22:59:46.631Z] addAuthTrigger {"eventTrigger":{"eventType":"providers/firebase.auth/eventTypes/user.create","resource":"projects/mock-eccomerce"}}
+[debug] [2022-11-13T22:59:46.631Z] [functions[us-central1-userAdd]] auth function initialized.
+[debug] [2022-11-13T22:59:46.632Z] [functions[us-central1-updateUser]] function ignored because the firestore emulator does not exist or is not running.
+[debug] [2022-11-13T22:59:46.633Z] [functions[us-central1-updateVendor]] function ignored because the firestore emulator does not exist or is not running.
+[debug] [2022-11-13T22:59:46.634Z] [functions[us-central1-updateItem]] function ignored because the firestore emulator does not exist or is not running.
+[info] i  functions: Loaded functions: userAdd, updateUser, updateVendor, updateItem 
+[warn] ⚠  functions: The following emulators are not running, calls to these services will affect production: firestore, database, pubsub, storage, eventarc 

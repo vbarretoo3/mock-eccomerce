@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import {db} from '../../../../context/Firebase';
-import {AiOutlinePlus} from 'react-icons/ai';
+import {MdClose} from 'react-icons/md';
 
 export default function AddVendor() {
   const itemRef = useRef()
@@ -15,6 +15,12 @@ export default function AddVendor() {
   const xlRef = useRef()
   const vendorRef = useRef()
   const [vendors, setVendors] = useState([])
+  const selectedVend = {
+    name:'',
+    vendorRef: ''
+  }
+  const [selectedVendors] = useState([selectedVend])
+  const [update, setUpdate] = useState(0)
   const history = useNavigate()
 
   const snap = async function() {
@@ -30,7 +36,52 @@ export default function AddVendor() {
     snap()
   }, [])
 
-  
+  const VendorSelector = useCallback(() => {
+    if (vendors === null) return null
+    return (
+      <>
+        {selectedVendors.map((vend, index) => 
+          <>
+            <div className="vendor-select-row">
+              <select key={index} className="vendor-selector" ref={vendorRef} onChange={() => vendorSelection(index)} defaultValue={`${vend.name},${vend.vendorRef}`} required>
+                <option value='' hidden>Select a Vendor</option>
+                {vendors.map((seller)=> 
+                  <option key={seller.id} value={[seller.data.name,seller.id]}>{seller.data.name}</option>
+                )}
+              </select>
+              <MdClose onClick={() => removeVendor(index)}/>
+            </div>
+          </>
+        )}
+        <button type="button" onClick={addVendorLine}>Add Vendor</button>
+      </>
+    )
+  }, [update, selectedVendors, vendors]) 
+
+  function removeVendor(index) {
+    selectedVendors.splice(index, 1)
+    if (selectedVendors.length === 0) {
+      selectedVendors.push(selectedVend)
+    }
+    setUpdate((currState) => currState + 1)
+  }
+
+  function addVendorLine() {
+    console.log(selectedVendors.length)
+    console.log(vendors.length)
+    if (selectedVendors.length < vendors.length) {
+      selectedVendors.push(selectedVend)
+      setUpdate((currUpdate) => currUpdate + 1)
+      console.log(selectedVendors)
+    }
+  }
+
+  function vendorSelection(index) {
+    const vendorInf = vendorRef.current.value.split(',')
+    selectedVendors[index].name = vendorInf[0]
+    selectedVendors[index].vendorRef = vendorInf[1]
+    console.table(selectedVendors)
+  }
 
   function handleCancel() {
     history(`/dashboard/inventory`)
@@ -38,7 +89,6 @@ export default function AddVendor() {
 
   async function handleSave(e) {
     e.preventDefault()
-    const vendorInfo = vendorRef.current.value.split(',')
     const docData = {
       name: itemRef.current.value,
       cost: Number(costRef.current.value),
@@ -50,12 +100,7 @@ export default function AddVendor() {
         large: Number(lRef.current.value),
         xlarge: Number(xlRef.current.value)
       },
-      vendors: [
-        {
-          name: vendorInfo[0],
-          id: vendorInfo[1]
-        },
-      ]
+      vendors: selectedVendors
     }
     console.log(docData)
     const docRef = await addDoc(collection(db, 'inventory'), docData)
@@ -144,12 +189,7 @@ export default function AddVendor() {
               <h3>Vendors</h3>
             </div>
             <div className="vendor-select">
-              <select className="vendor-selector" ref={vendorRef} defaultValue='' required>
-                <option value=''>Select a Vendor</option>
-                {vendors.map((seller)=> 
-                  <option key={seller.id} value={[seller.data.name, seller.id]}>{seller.data.name}</option>
-                )}
-              </select>
+              <VendorSelector />
             </div>
           </div>
           <div>

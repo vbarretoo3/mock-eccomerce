@@ -101,7 +101,6 @@ export default function AddOrder() {
 
   function removeLine(index, setInfo) {
     selectedItems.splice(index, 1)
-    console.log(selectedItems)
     if (selectedItems.length === 0) {
         setSelectedItems([item])
         setInfo(null)

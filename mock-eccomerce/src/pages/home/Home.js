@@ -3,16 +3,16 @@ import Collection from '../../components/Collection'
 
 function Home() {
   const [count, setCount] = useState('')
-  var myfunc = setInterval(function() {
-  var discountDate = new Date("Dec 25, 2022 09:00:00").getTime()
-  var now = new Date().getTime()
-  var timeLeft = discountDate - now
-  var days = Math.floor(timeLeft / (1000*60*60*24))
-  var hours = Math.floor((timeLeft % (1000*60*60*24)) / (1000*60*60))
-  var minutes = Math.floor((timeLeft % (1000*60*60)) / (1000*60))
-  return (
-    setCount(`${days} DAYS, ${hours}H & ${minutes}MIN`)
-    )
+  const myfunc = setInterval(function() {
+    var discountDate = new Date("Dec 25, 2022 09:00:00").getTime()
+    var now = new Date().getTime()
+    var timeLeft = discountDate - now
+    var days = Math.floor(timeLeft / (1000*60*60*24))
+    var hours = Math.floor((timeLeft % (1000*60*60*24)) / (1000*60*60))
+    var minutes = Math.floor((timeLeft % (1000*60*60)) / (1000*60))
+    return (
+      setCount(`${days} DAYS, ${hours}H & ${minutes}MIN`)
+      )
   }, 1000)
 
   return (
