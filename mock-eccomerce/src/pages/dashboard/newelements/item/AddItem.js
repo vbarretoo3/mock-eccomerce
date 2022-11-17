@@ -15,6 +15,7 @@ export default function AddVendor() {
   const xlRef = useRef()
   const vendorRef = useRef()
   const [vendors, setVendors] = useState([])
+  const [items, setItems] = useState([])
   const selectedVend = {
     name:'',
     vendorRef: ''
@@ -30,6 +31,12 @@ export default function AddVendor() {
       vendorsArr.push({id: doc.id, data: doc.data()})
     })
     setVendors(vendorsArr)
+    const itemsSnap = await getDocs(collection(db, 'inventory'))
+    const itemsArr = []
+    itemsSnap.forEach((doc) => {
+      itemsArr.push({id: doc.id, data: doc.data()})
+    })
+    setItems(itemsArr)
   }
 
   useEffect(() => {
@@ -100,7 +107,8 @@ export default function AddVendor() {
         large: Number(lRef.current.value),
         xlarge: Number(xlRef.current.value)
       },
-      vendors: selectedVendors
+      vendors: selectedVendors,
+      id: (items.length + 1)
     }
     console.log(docData)
     const docRef = await addDoc(collection(db, 'inventory'), docData)
@@ -130,6 +138,7 @@ export default function AddVendor() {
                 <option value='Pants'>Pants</option>
                 <option value='Hoodie'>Hoodie</option>
                 <option value='Hat'>Hat</option>
+                <option value='Jacket'>Jacket</option>
               </select>
               <br/>
               <br/>

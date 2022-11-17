@@ -4,8 +4,7 @@ import { collection, doc, getDoc, updateDoc, getDocs } from 'firebase/firestore'
 import {db, storage} from '../../../context/Firebase';
 import {BsFillPencilFill} from  'react-icons/bs';
 import {MdClose} from 'react-icons/md'
-import { v4 } from "uuid";
-import { uploadBytes, ref, listAll, getDownloadURL } from "firebase/storage";
+import { uploadBytes, ref } from "firebase/storage";
 
 export default function Invent() {
   const id= useParams()
@@ -100,6 +99,7 @@ export default function Invent() {
   async function handleSave() {
     const userData = {
       name: nameRef.current.value,
+      id: inventory.data.id,
       category: categoryRef.current.value,
       price: Number(priceRef.current.value),
       cost: Number(costRef.current.value),

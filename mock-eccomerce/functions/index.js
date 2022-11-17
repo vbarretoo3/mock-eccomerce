@@ -14,8 +14,17 @@ const db = admin.firestore()
 exports.userAdd = functions.auth.user().onCreate(user => {
     var userData = {
         contact: {
-            email: user.email
-        }
+            email: user.email,
+            phone: ''
+        },
+        address: {
+            address: '',
+            city: '',
+            province: '',
+            postal: '',
+        },
+        name: '',
+        status: 'customer'
     }
     return db.collection("customers").doc(user.uid).set(userData)
 })

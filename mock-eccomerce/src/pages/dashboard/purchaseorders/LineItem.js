@@ -66,7 +66,7 @@ function LineItem({item, index, order, setUpdate, setSubtotal, setTax, setTotal,
     }
 
     if (sizes === undefined) {
-      var sizes = [{small: 1}, {large: 1}, {xlarge: 1}, {medium: 1}]
+      sizes = [{small: 1}, {large: 1}, {xlarge: 1}, {medium: 1}]
     }
 
   return (

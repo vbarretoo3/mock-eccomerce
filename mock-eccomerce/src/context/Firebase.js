@@ -6,6 +6,7 @@ import { getStorage } from 'firebase/storage';
 const firebaseConfig = {
     apiKey: "AIzaSyDZ0PX9Soqzlh1JAhEs3fyOX3ODxxaKwLQ",
     authDomain: "mock-eccomerce.firebaseapp.com",
+    databaseURL: "https://mock-eccomerce-default-rtdb.firebaseio.com",
     projectId: "mock-eccomerce",
     storageBucket: "mock-eccomerce.appspot.com",
     messagingSenderId: "112068762895",

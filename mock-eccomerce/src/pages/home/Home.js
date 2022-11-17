@@ -3,7 +3,7 @@ import Collection from '../../components/Collection'
 
 function Home() {
   const [count, setCount] = useState('')
-  const myfunc = setInterval(function() {
+  const timerFunction = setInterval(function() {
     var discountDate = new Date("Dec 25, 2022 09:00:00").getTime()
     var now = new Date().getTime()
     var timeLeft = discountDate - now

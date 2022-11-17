@@ -2,7 +2,7 @@ import React from 'react';
 import CollectionItem from './CollectionItem';
 
 function Collection() {
-    const items = ['shoes', 'shirt', 'pants', 'coats', 'test']
+    const items = ['Shirt', 'Pants', 'Hoodie', 'Hat', 'Jacket']
     return (
     <>
         <div className='collection-container'>
