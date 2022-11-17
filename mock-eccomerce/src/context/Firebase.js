@@ -4,13 +4,13 @@ import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDZ0PX9Soqzlh1JAhEs3fyOX3ODxxaKwLQ",
-    authDomain: "mock-eccomerce.firebaseapp.com",
-    databaseURL: "https://mock-eccomerce-default-rtdb.firebaseio.com",
-    projectId: "mock-eccomerce",
-    storageBucket: "mock-eccomerce.appspot.com",
-    messagingSenderId: "112068762895",
-    appId: "1:112068762895:web:8abc084e599093d317b27a"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_FIREBASE_APP_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
     };
 
 const app = initializeApp(firebaseConfig);
