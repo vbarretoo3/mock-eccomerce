@@ -1,8 +1,10 @@
 import { collection, getDocs } from 'firebase/firestore';
 import React, { useCallback, useEffect, useState } from 'react';
-import { db } from '../../context/Firebase.js';
+import { db, createStripeCheckout } from '../../context/Firebase.js';
 import {MdClose} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
+import Stripe from 'stripe';
+import  { loadStripe } from '@stripe/stripe-js'
 
 export default function Cart() {
   const history = useNavigate()
@@ -10,6 +12,7 @@ export default function Cart() {
   const [inventory, setInventory] = useState(null)
   const [update, setUpdate] = useState(0)
   const inventoryArr = []
+  //const stripe = Stripe('pk_test_51M4siRDWmzMl593LGpUyhUIlnVEAr4YEOIZV7oq40BmIDze32tCDU1hsrGJz7DrWfHkVbonL090mBtokmpvWWq1D00nvRNxIh9')
   const finalItems = []
   const snap = async () => {
     const docSnap = await getDocs(collection(db, 'inventory')) 
@@ -89,8 +92,12 @@ export default function Cart() {
     )
   }, [update, inventory, cart])
 
-  function handleCheckout() {
-    console.logß('checked')
+  async function handleCheckout() {
+    const stripe = await loadStripe('pk_test_51M4siRDWmzMl593LGpUyhUIlnVEAr4YEOIZV7oq40BmIDze32tCDU1hsrGJz7DrWfHkVbonL090mBtokmpvWWq1D00nvRNxIh9')
+    createStripeCheckout(cart).then(response => {
+      const sessionId = response.data.id
+      stripe.redirectToCheckout({ sessionId: sessionId })
+    })
   }
 
   if(inventory === null) return null

@@ -29,8 +29,6 @@ function Navbar() {
 
     if (customers === null) return null
 
-    console.log(currentUser)
-
     if (currentUser !== null){
         for (let x of customers) {
             if (currentUser.uid === x.id) {

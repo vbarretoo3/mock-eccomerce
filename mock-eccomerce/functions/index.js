@@ -170,3 +170,30 @@ exports.updateItem = functions.firestore
         })
     })
 })
+
+exports.createStripeCheckout = functions.https.onCall(async(data, context) => {
+    const stripe = require('stripe')(functions.config().stripe.secret_key);
+    const items = []
+    data.forEach((item) => items.push({
+        quantity: Number(item.quantity),
+        price_data: {
+            currency: 'usd',
+            unit_amount: item.price * 100,
+            product_data: {
+                name: item.name,
+            },
+        }
+    }))
+    console.log(items)
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        mode: 'payment',
+        success_url: 'http://localhost:3000/success',
+        cancel_url: 'http://localhost:3000/cart',
+        line_items: items
+    });
+
+    return {
+        id: session.id,
+    };
+});

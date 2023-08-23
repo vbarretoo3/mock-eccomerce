@@ -94,7 +94,8 @@ export default function Item({setMasterUpdate}) {
             size: sizeRef.current.value,
             quantity: qtyRef.current.value,
             price: data.data.price,
-            itemRef: data.data.id
+            itemRef: data.data.id,
+            name: data.data.name,
         }
         const prevData = JSON.parse(localStorage.getItem('cart'))
         if(prevData !== null) {
